@@ -8,7 +8,7 @@
           :class="`x-${x} y-${y} z-${z}`"
           :key="`${x}-${y}-${z}`"
         >
-          
+          <cube :accordinate="accordinates[x][y][z]" :width="width"></cube>
         </div>
       </div>
     </div>
@@ -38,7 +38,7 @@ export default {
   },
   data() {
     return {
-      msg: 'Welcome to Rubic'
+      accordinates: {}
     }
   },
   computed: {
@@ -52,6 +52,17 @@ export default {
         }
       }
       return accords
+    }
+  },
+  created() {
+    for (let x = 0; x < this.level; x++) {
+      this.accordinates[x] = {}
+      for (let y = 0; y < this.level; y++) {
+        this.accordinates[x][y] = {}
+        for (let z = 0; z < this.level; z++) {
+          this.accordinates[x][y][z] = { x, y, z }
+        }
+      }
     }
   }
 }
@@ -72,6 +83,5 @@ export default {
 
 .piece-container {
   position: absolute;
-  background-color: #ccc;
 }
 </style>
